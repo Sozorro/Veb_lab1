@@ -1,6 +1,6 @@
 # Лабораторная работа №1
 
-<img alt="Turtles before death (lab surrender)" src="dop/turtle-dance-gang.gif" height="800">
+<img alt="Turtles before death (lab surrender)" src="dop/turtle-dance-gang.gif" height="400">
 
 Вариант работы: `504486`
 

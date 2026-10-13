@@ -127,9 +127,10 @@ button:hover {
 
 .buttons {
     display: flex;
-    flex-wrap: wrap;     /* на узком экране перенесутся */
+    flex-wrap: wrap;
     gap: 0 10px;
 }
+
 #result-table {
     width: 100%;
     border-collapse: collapse;

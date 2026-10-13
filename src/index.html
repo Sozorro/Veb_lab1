@@ -27,47 +27,51 @@
             <form id="coord-inp" method="get">
                 <fieldset>
                     <legend> Координата X: </legend>
-                    <label for="x--5">-5</label>
+                    <label for="x--5">-5:</label>
                     <input type="radio" id="x--5" name="x" value="-5">
-                    <label for="x--4">-4</label>
+                    <label for="x--4">-4:</label>
                     <input type="radio" id="x--4" name="x" value="-4">
-                    <label for="x--3">-3</label>
+                    <label for="x--3">-3:</label>
                     <input type="radio" id="x--3" name="x" value="-3">
-                    <label for="x--2">-2</label>
+                    <label for="x--2">-2:</label>
                     <input type="radio" id="x--2" name="x" value="-2">
-                    <label for="x--1">-1</label>
+                    <label for="x--1">-1:</label>
                     <input type="radio" id="x--1" name="x" value="-1">
-                    <label for="x-0">0</label>
+                    <label for="x-0">0:</label>
                     <input type="radio" id="x-0" name="x" value="0" required>
-                    <label for="x-1">1</label>
+                    <label for="x-1">1:</label>
                     <input type="radio" id="x-1" name="x" value="1">
-                    <label for="x-2">2</label>
+                    <label for="x-2">2:</label>
                     <input type="radio" id="x-2" name="x" value="2">
-                    <label for="x-3">3</label>
+                    <label for="x-3">3:</label>
                     <input type="radio" id="x-3" name="x" value="3">
                 </fieldset>
 
-                <label for="y">Координата Y: Введите значение от -3 до 5:</label>
-                <input type="text" id="y" name="y"
-                        inputmode="decimal" autocomplete="off"
-                        pattern="-?\d+([.,]\d+)?" maxlength="20"
-                        placeholder="-3 ... 5" title="Число от -3 до 5, например -2 или 3.5" required>
-
+                <fieldset>
+                    <legend>Координата Y:</legend>
+                    <label for="y">Введите значение от -3 до 5:</label>
+                    <input type="text" id="y" name="y"
+                            inputmode="decimal" autocomplete="off"
+                            pattern="-?\d+([.,]\d+)?" maxlength="20"
+                            placeholder="-3 ... 5" title="Число от -3 до 5, например -2 или 3.5" required>
+                </fieldset>
                 <fieldset>
                     <legend> Координата R: </legend>
-                    <label for="r-1">1</label>
+                    <label for="r-1">1:</label>
                     <input type="checkbox" id="r-1" name="r" value="1">
-                    <label for="r-1-5">1.5</label>
+                    <label for="r-1-5">1.5:</label>
                     <input type="checkbox" id="r-1-5" name="r" value="1.5">
-                    <label for="r-2">2</label>
+                    <label for="r-2">2:</label>
                     <input type="checkbox" id="r-2" name="r" value="2">
-                    <label for="r-2-5">2.5</label>
+                    <label for="r-2-5">2.5:</label>
                     <input type="checkbox" id="r-2-5" name="r" value="2.5">
-                    <label for="r-3">3</label>
+                    <label for="r-3">3:</label>
                     <input type="checkbox" id="r-3" name="r" value="3">
                 </fieldset>
-                <button type="submit">Проверить точку</button>
-                <button type="reset">Сбросить выбранные варианты</button>
+                <div class="buttons">
+                    <button type="submit">Проверить точку</button>
+                    <button type="reset">Сбросить</button>
+                </div>
             </form>
         </section>
         <section id="result-block">

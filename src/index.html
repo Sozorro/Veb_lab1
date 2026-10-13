@@ -3,20 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="lab1">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
     <title>Лабораторная работа №1</title>
 </head>
 <body>
     <header>
-        <p class="my-FIO">Пегушина Виктория Александровна</p>
-        <p class="my-group">Группа: Р3206</p>
-        <p class="my-varint">Вариант: 504486</p>
+        <p class="student-fio">Пегушина Виктория Александровна</p>
+        <p class="student-group">Группа: P3206</p>
+        <p class="student-variant">Вариант: 504486</p>
     </header>
     <main>
         <h1>Проверка попадания точки в область</h1>
-        <section id="main-block">
+        <section id="basic-block">
+            <h2>Координаты точки</h2>
+            <form id="coord-inp" method="post">
+                <fieldset>
+                    <legend> Координата X: </legend>
+                    <label for="x--5">-5</label>
+                    <input type="radio" id="x--5" name="x" value="-5">
+                    <label for="x--4">-4</label>
+                    <input type="radio" id="x--4" name="x" value="-4">
+                    <label for="x--3">-3</label>
+                    <input type="radio" id="x--3" name="x" value="-3">
+                    <label for="x--2">-2</label>
+                    <input type="radio" id="x--2" name="x" value="-2">
+                    <label for="x--1">-1</label>
+                    <input type="radio" id="x--1" name="x" value="-1">
+                    <label for="x-0">0</label>
+                    <input type="radio" id="x-0" name="x" value="0" required>
+                    <label for="x-1">1</label>
+                    <input type="radio" id="x-1" name="x" value="1">
+                    <label for="x-2">2</label>
+                    <input type="radio" id="x-2" name="x" value="2">
+                    <label for="x-3">3</label>
+                    <input type="radio" id="x-3" name="x" value="3">
+                </fieldset>
 
+                <label for="y">Координата Y: Введите значение от -3 до 5:</label>
+                <input type="text" id="y" name="y"
+                        inputmode="decimal" autocomplete="off"
+                        pattern="-?\d+([.,]\d+)?" maxlength="20" 
+                        placeholder="-3 ... 5" title="Число от -3 до 5, например -2 или 3.5" required>
+
+                <fieldset>
+                    <legend> Координата R: </legend>
+                    <label for="r-1">1</label>
+                    <input type="checkbox" id="r-1" name="r" value="1">
+                    <label for="r-1-5">1.5</label>
+                    <input type="checkbox" id="r-1-5" name="r" value="1.5">
+                    <label for="r-2">2</label>
+                    <input type="checkbox" id="r-2" name="r" value="2">
+                    <label for="r-2-5">2.5</label>
+                    <input type="checkbox" id="r-2-5" name="r" value="2.5">
+                    <label for="r-3">3</label>
+                    <input type="checkbox" id="r-3" name="r" value="3">
+                </fieldset>
+                <button type="submit">Проверить точку</button>
+                <button type="reset">Сбросить выбранные варианты</button>
+            </form>
         </section>
     </main>
 </body>

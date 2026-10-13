@@ -1,5 +1,6 @@
 'use strict';
 
+const form = document.getElementById("coord-inp");
 const canvas = document.getElementById('graph');
 const ctx = canvas.getContext('2d');
 
@@ -142,18 +143,120 @@ function redraw(){
     drawArea();
 }
 
-
 redraw();
 
-const form = document.getElementById("coord-inp");
-const rBoxes = form.querySelectorAll('input[name="r"]');
+const boxR = form.querySelectorAll('input[name="r"]');
 
-function checkR() {
-    const anyChecked = [...rBoxes].some(box => box.checked);
-    rBoxes[0].setCustomValidity(anyChecked ? "" : "Выберите хотя бы одно значение R");
+function checkR(){
+    const validR = [...boxR].some(box => box.checked);
+    boxR[0].setCustomValidity(validR ? "" : "Выберите хотя бы одно значение R");
 }
 
-rBoxes.forEach(box => box.addEventListener("change", checkR));
+boxR.forEach(box => box.addEventListener("change", checkR));
 form.addEventListener("reset", () => setTimeout(checkR));
 checkR();
 
+function parseY(text) {
+    const str = text.trim().replace(',', '.');
+    if(str === "") {
+        return null;
+    }
+    const num = Number(str);
+    if(!Number.isFinite(num) || -3 > num || num > 5) {
+        return null;
+    }
+    return num;
+}
+
+function isHit(x, y, r){
+    const EPS = 1e-9;
+    if (x <= 0 && y >= 0) {
+        return x * x + y * y <= (r / 2) * (r / 2) + EPS;
+    }
+    if (x <= 0 && y <= 0) {
+        return x >= -r - EPS && y >= -r - EPS;
+    }
+    if (x >= 0 && y <= 0) {
+        return y >= x - r - EPS;
+    }
+    return false;
+}
+
+const STORAGE_KEY = 'lab1-results';
+const tableBody = document.getElementById('result-body');
+
+function loadResults() {
+    try {
+        const data = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]');
+        return Array.isArray(data) ? data : [];
+    } catch (err) {
+        return [];
+    }
+}
+
+function saveResults() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(results));
+}
+
+function renderTable() {
+    tableBody.replaceChildren();
+    for (const res of results) {
+        const tr = document.createElement('tr');
+        const cells = [
+            res.x,
+            res.y,
+            res.r,
+            res.hit ? 'Попала' : 'Мимо',
+            new Date(res.time).toLocaleString('ru-RU')
+        ];
+        for (const value of cells) {
+            const td = document.createElement('td');
+            td.textContent = value;
+            tr.append(td);
+        }
+        tableBody.append(tr);
+    }
+}
+
+let results = loadResults();
+
+document.getElementById('clear-btn').addEventListener('click', () => {
+    results = [];
+    saveResults();
+    renderTable();
+});
+
+renderTable();
+
+form.elements.y.addEventListener('input', () => form.elements.y.setCustomValidity(''));
+form.querySelectorAll('input[name="x"]').forEach(r => r.addEventListener('change', () => form.querySelector('input[name="x"]').setCustomValidity('')));
+
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const inpCoordX = form.querySelector('input[name="x"]:checked');
+    if (inpCoordX === null) {
+        const firstX = form.querySelector('input[name="x"]');
+        firstX.setCustomValidity('Выберите значение X');
+        firstX.reportValidity();
+        return;
+    }
+    const coordX = Number(inpCoordX.value);
+    
+    const strY = form.elements.y;
+    const coordY = parseY(strY.value);
+    if (coordY === null) {
+        strY.setCustomValidity('Y должно быть корректным числом от -3 до 5');
+        strY.reportValidity();
+        return;
+    }
+
+    const boxStrR = [...form.querySelectorAll('input[name="r"]:checked')].map(box => box.value);
+    const boxNumR = boxStrR.map(box => Number(box));
+    for (const coordR of boxNumR) {
+        results.unshift({ x: coordX, y: coordY, r: coordR, hit: isHit(coordX, coordY, coordR), time: Date.now() });
+    }
+
+    saveResults();
+    renderTable();
+});

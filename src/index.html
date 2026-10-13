@@ -16,9 +16,15 @@
     </header>
     <main>
         <h1>Проверка попадания точки в область</h1>
-        <section id="basic-block">
+        <section id="graph-block">
+            <h2>График</h2>
+            <canvas id="graph" width="400" height="400"
+                    role="img" aria-label="График области">
+            </canvas>
+        </section>
+        <section id="input-block">
             <h2>Координаты точки</h2>
-            <form id="coord-inp" method="post">
+            <form id="coord-inp" method="get">
                 <fieldset>
                     <legend> Координата X: </legend>
                     <label for="x--5">-5</label>
@@ -44,7 +50,7 @@
                 <label for="y">Координата Y: Введите значение от -3 до 5:</label>
                 <input type="text" id="y" name="y"
                         inputmode="decimal" autocomplete="off"
-                        pattern="-?\d+([.,]\d+)?" maxlength="20" 
+                        pattern="-?\d+([.,]\d+)?" maxlength="20"
                         placeholder="-3 ... 5" title="Число от -3 до 5, например -2 или 3.5" required>
 
                 <fieldset>
